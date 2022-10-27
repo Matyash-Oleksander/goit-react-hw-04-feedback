@@ -62,8 +62,8 @@ class StateChangeFeedback extends Component {
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
-            total={this.countTotalFeedback}
-            percentage={this.countPositiveFeedbackPercentage}
+            total={this.countTotalFeedback()}
+            percentage={this.countPositiveFeedbackPercentage()}
           />
         ) : (
           <Notification />
