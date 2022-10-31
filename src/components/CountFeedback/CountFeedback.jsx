@@ -48,7 +48,7 @@ class StateChangeFeedback extends Component {
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={(good, bad, neutral)}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.clickButton}
           />
         </Section>
