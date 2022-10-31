@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import css from './CountFeedback.module.css';
+// import css from './CountFeedback.module.css';
 import FeedbackOptions from '../Controls';
 import Statistics from '../Statistics';
-// import Section from '../Section/Section';
+import Section from '../Section/Section';
 import Notification from '../Notification';
 
 class StateChangeFeedback extends Component {
@@ -45,25 +45,27 @@ class StateChangeFeedback extends Component {
     const { good, bad, neutral } = this.state;
 
     return (
-      <section className={css.statistics}>
-        <h2 className={css.title}>Please leave feedback</h2>
-        <FeedbackOptions
-          options={(good, bad, neutral)}
-          onLeaveFeedback={this.clickButton}
-        />
-        <h2 className={css.title}>Statistics</h2>
-        {this.countPositiveFeedbackPercentage() > 0 ? (
-          <Statistics
-            good={good}
-            neutral={neutral}
-            bad={bad}
-            total={this.countTotalFeedback()}
-            percentage={this.countPositiveFeedbackPercentage()}
+      <>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            options={(good, bad, neutral)}
+            onLeaveFeedback={this.clickButton}
           />
-        ) : (
-          <Notification />
-        )}
-      </section>
+        </Section>
+        <Section title="Statistics">
+          {this.countPositiveFeedbackPercentage() > 0 ? (
+            <Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={this.countTotalFeedback()}
+              percentage={this.countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification />
+          )}
+        </Section>
+      </>
     );
   }
 }
