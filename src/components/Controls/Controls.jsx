@@ -2,18 +2,18 @@ import React from 'react';
 
 import css from '../CountFeedback/CountFeedback.module.css';
 
-const Controls = ({ onGood, onNeutral, onBad }) => (
+const FeedbackOptions = ({ options, onLeaveFeedback }) => (
   <div className={css.boxButton}>
-    <button className={css.btnGood} onClick={onGood}>
+    <button className={css.btnGood} name="good" onClick={onLeaveFeedback}>
       Good
     </button>
-    <button className={css.btnNeutral} onClick={onNeutral}>
+    <button className={css.btnNeutral} name="neutral" onClick={onLeaveFeedback}>
       Neutral
     </button>
-    <button className={css.btnBad} onClick={onBad}>
+    <button className={css.btnBad} name="bad" onClick={onLeaveFeedback}>
       Bad
     </button>
   </div>
 );
 
-export default Controls;
+export default FeedbackOptions;

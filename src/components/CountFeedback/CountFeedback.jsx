@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import css from './CountFeedback.module.css';
-import Controls from '../Controls/Controls';
-import Statistics from '../Statistics/Statistics';
+import FeedbackOptions from '../Controls';
+import Statistics from '../Statistics';
 // import Section from '../Section/Section';
-import Notification from '../Notification/Notification';
+import Notification from '../Notification';
 
 class StateChangeFeedback extends Component {
   constructor(props) {
@@ -18,22 +18,16 @@ class StateChangeFeedback extends Component {
   }
 
   static propTypes = {
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
+    good: PropTypes.number,
+    neutral: PropTypes.number,
+    bad: PropTypes.number,
   };
 
-  clickGood = () => {
-    this.setState(prevState => ({ good: prevState.good + 1 }));
+  clickButton = evt => {
+    this.setState(prevState => {
+      return { [evt.target.name]: prevState[evt.target.name] + 1 };
+    });
   };
-  clickNeutral = () => {
-    this.setState(prevState => ({ neutral: prevState.neutral + 1 }));
-  };
-  clickBad = () => {
-    this.setState(prevState => ({ bad: prevState.bad + 1 }));
-  };
-
-  // console.log('Hello');
 
   countTotalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
@@ -48,20 +42,21 @@ class StateChangeFeedback extends Component {
   };
 
   render() {
+    const { good, bad, neutral } = this.state;
+
     return (
       <section className={css.statistics}>
         <h2 className={css.title}>Please leave feedback</h2>
-        <Controls
-          onGood={this.clickGood}
-          onNeutral={this.clickNeutral}
-          onBad={this.clickBad}
+        <FeedbackOptions
+          options={(good, bad, neutral)}
+          onLeaveFeedback={this.clickButton}
         />
         <h2 className={css.title}>Statistics</h2>
-        {this.state.good > 0 || this.state.neutral > 0 || this.state.bad > 0 ? (
+        {this.countPositiveFeedbackPercentage() > 0 ? (
           <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             total={this.countTotalFeedback()}
             percentage={this.countPositiveFeedbackPercentage()}
           />
