@@ -21,12 +21,13 @@
 .boxButton {
   display: flex;
   justify-content: center;
+  margin: auto;
 }
 
 .btnGood,
 .btnNeutral,
 .btnBad {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   padding: 0 25px;
   margin: 0 15px 15px 0;
